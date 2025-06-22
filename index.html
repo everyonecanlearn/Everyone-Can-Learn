@@ -39,3 +39,142 @@
     }
     main {
       padding: 20px;
+    }
+    section {
+      background: white;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 900px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #1565c0;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    p, ul {
+      font-size: 1.2em;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+    .button {
+      background-color: #1976d2;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #125aa3;
+    }
+    .interactive {
+      margin-top: 15px;
+    }
+    input[type="text"], input[type="number"] {
+      font-size: 1em;
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e3f2fd;
+      font-size: 1em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to LearnZone</h1>
+    <p>Accessible Learning for Teens with Autism, ADHD, and Learning Differences</p>
+  </header>
+
+  <nav>
+    <a href="#reading">Reading</a>
+    <a href="#writing">Writing</a>
+    <a href="#maths">Maths</a>
+    <a href="#resources">Tools</a>
+  </nav>
+
+  <main>
+    <section id="reading">
+      <h2>Reading Zone</h2>
+      <p>Explore interactive stories, phonics games, and audio books to help improve your reading skills.</p>
+      <div class="interactive">
+        <p><strong>Type a word and hear it:</strong></p>
+        <input type="text" id="readInput" placeholder="Type a word...">
+        <button class="button" onclick="speakText('readInput')">Read Aloud</button>
+      </div>
+    </section>
+
+    <section id="writing">
+      <h2>Writing Zone</h2>
+      <p>Build confidence with fun spelling challenges, sentence building tools, and voice-to-text practice.</p>
+      <div class="interactive">
+        <p><strong>Write a sentence:</strong></p>
+        <input type="text" id="writeInput" placeholder="Write something...">
+        <button class="button" onclick="speakText('writeInput')">Read My Sentence</button>
+      </div>
+    </section>
+
+    <section id="maths">
+      <h2>Maths Zone</h2>
+      <p>Use visual aids, puzzles, and step-by-step guides to make maths easier and more fun.</p>
+      <div class="interactive">
+        <p><strong>Quick Add:</strong></p>
+        <input type="number" id="num1" placeholder="Number 1">
+        <input type="number" id="num2" placeholder="Number 2">
+        <button class="button" onclick="addNumbers()">Add</button>
+        <p id="mathsResult"></p>
+      </div>
+    </section>
+
+    <section id="resources">
+      <h2>Accessibility Tools</h2>
+      <ul>
+        <li>Text-to-Speech Reading</li>
+        <li>Dyslexia-Friendly Fonts</li>
+        <li>Colour Filters and Overlays</li>
+        <li>Adjustable Font Sizes & Spacing</li>
+        <li>Progress Tracking and Rewards</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 LearnZone. Made with care for neurodivergent learners.
+  </footer>
+
+  <script>
+    function speakText(inputId) {
+      const input = document.getElementById(inputId);
+      const text = input.value;
+      if (text.trim() === '') return;
+      const msg = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(msg);
+    }
+
+    function addNumbers() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById("mathsResult").innerText = "Please enter valid numbers.";
+        return;
+      }
+      const sum = num1 + num2;
+      document.getElementById("mathsResult").innerText = `Result: ${sum}`;
+    }
+  </script>
+</body>
+</html>
